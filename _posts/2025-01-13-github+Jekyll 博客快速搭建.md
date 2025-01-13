@@ -1,0 +1,389 @@
+---
+layout: post
+title:  "github+Jekyll 博客快速搭建"
+date:   2025-01-13 12:07:12 -0200
+categories: blog
+layout: post
+---
+## 1.背景
+> 由于最近开始写文章，除了向外投稿外，也想尝试搭建自己的博客。经过了解，github搭建网站很好（^省钱^），故而学习如何使用github搭建网站
+>
+
+## 2.条件准备
+> github账号：国内邮箱注册即可，需要能够收到邮件。
+>
+> 梯子：用于加速
+>
+
+## 3.github注册
+1.根据[github注册界面](https://github.com/signup)要求，依次输入：
+
++ 邮箱
++ github密码
++ github用户名
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736408781379-daf64533-90e7-47fc-9b82-f1fc7332aa07.png)
+
+2.输入相关信息，点击continue邮箱即可收到验证码，输入即可完成注册。
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736408842880-55990534-bb75-45c3-91f0-1bc35bc92b88.png)
+
+3.注册后，访问[Password and authentication](https://github.com/settings/security),然后Two-factor authentication生成二维码扫描即可。
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736409128169-02a26edf-8381-4238-a654-66566c1f7f2f.png)
+
+4.根据要求使用`**手机身份验证器**`扫描二维码即可绑定MFA。到此完成账号的注册
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736409272302-43c9b218-40cc-45d6-b498-43fad37ee544.png)
+
+## 4.搭建流程
+### 4.1.环境配置
+本教程基于windows系统用户使用，在搭建博客前需要准备如下环境，该部分讲解相关工具的安装, 测试环境配置及版本放在下面
+
+> + **Ruby：**ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +PRISM [x64-mingw-ucrt]
+> + **Jekyll：**jekyll 4.3.4
+> + **bundler ：**Bundler version 2.6.2
+> + **git：**git version 2.47.1.windows.1
+> + **vscode：**随意即可
+>
+
+#### 4.1.1.ruby安装
+> 下载链接：https://rubyinstaller.org/downloads/
+>
+
+1.在官网下载ruby安装包。下载后解压安装。
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736410556551-fb88d588-3bf2-4eb4-a196-d1f157129496.png)
+
+2.安装会弹出窗口提示安装MSYS2环境，选择3即可，选1可能会导致安装jekyll失败
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736417013970-c4fcab81-c235-4eca-a486-549c46e05ba0.png)
+
+3.然后会自动下载MSYS2安装包，根据提示安装即可，这里均默认即可。
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736415137528-98dfacb2-959f-45c9-b9ad-6aaec72aae2a.png)
+
+4.安装完成后，执行命令测试是否安装成功,其中gem是 Ruby 的包管理器 
+
+> ruby -v 
+>
+> gem -v
+>
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736415513818-479a279f-dc2a-4714-ab69-ed6359205a7e.png)
+
+#### 4.1.2.安装 bundler jekyll  
+bundler、jekyll使用gem即可完成安装
+
+1.安装命令
+
+> gem install bundler jekyll
+>
+
+2.执行命令查询工具是否安装成功
+
+> bundler -v
+>
+> jekyll -v
+>
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736416930224-63422ac0-d18f-4f2b-afb7-d100673e9cc8.png)
+
+#### 4.1.3.安装git
+1.访问[git官网](https://git-scm.com/downloads/win)下载安装包。
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736415950646-26455f0c-275e-437d-9edf-78f0a7cb40fe.png)2.安装过程中需要选择 **"Use Git from the Windows Command Prompt"**，其余默认即可。
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736416108292-739e8498-d9f0-432d-ba3e-a8353519de6d.png)
+
+#### 4.1.4.安装vscode
+1.访问[vscode官网](https://code.visualstudio.com/)，点击windows下载安装包,也是使用默认安装即可。
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736416285316-98df6367-0c50-48e5-9206-d84df25bc42a.png)
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736416377113-4d061e24-07f9-4184-ac52-da5db55b0c36.png)
+
+### 4.2博客搭建流程
+#### 4.2.1.创建github博客仓库
+1.登录GitHub，访问链接：https://github.com/new准备创建一个仓库
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736492762848-5937386d-e4da-4af0-8700-372b8637e130.png)
+
+2.这里主要需要注意的点有三个，配置完成后，点击`Create repository`即可完成创建
+
+> + **<font style="color:rgb(31, 35, 40);">Repository name： </font>**<font style="color:rgb(31, 35, 40);">搭建博客需要创建一个类似</font>`<font style="color:rgb(31, 35, 40);">username.github.io  </font>`<font style="color:rgb(31, 35, 40);">，username为自定义的博客名，建议username与github名相同，</font>**<font style="color:rgb(31, 35, 40);">相关原因后续会详细介绍。</font>**
+> + **<font style="color:rgb(31, 35, 40);">Public： </font>**<font style="color:rgb(31, 35, 40);">需要配置仓库属性为Pubilc</font>
+> + **<font style="color:rgb(31, 35, 40);">Initialize this repository with:  </font>**<font style="color:rgb(31, 35, 40);">可选项目，用于介绍自己的仓库</font>
+>
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736493690036-5ed7db58-fc7b-4bf5-9707-2427eb52af05.png)
+
+#### 4.2.2.初始化jekyll项目
+1.本地新建一个jekyll项目
+
+> jekyll new new-blog
+>
+> cd new-blog
+>
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736493827123-fb8865ae-09fc-4fe7-bc56-a3b5f12c9739.png)
+
+2.使用bundle本地搭建环境进行测试，执行如下命令后，访问本地127.0.0.1:4000即可看到博客初始模样
+
+> bundle exec jekyll serve
+>
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736494572218-9ef72c87-6c35-44ec-ab6f-8e8b50e00d4d.png)
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736494584491-c3f5e444-a078-4524-930a-b894e8041905.png)
+
+3.执行bundle命令时，可能会遇到如下报错，遇到如下报错的时只需要在gemfile中把缺少的依赖补充进去即可。
+
+> **格式：gem 依赖**
+>
+> **eg: gem csv**
+>
+
+![缺少依赖报错](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736494624504-6cc4e4cb-b742-491f-a052-44fe4b72bafe.png)
+
+![解决方法](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736494670599-a92cf438-28ff-430c-a994-ef254c63cea6.png)
+
+#### 4.2.3.创建git推送token
+1.登录github，生成 `Personal Access Token`，链接为[https://github.com/settings/tokens](https://github.com/settings/tokens)，生成token的过程需要输入MFA。输入后点击verify进入配置界面
+
+![token生成点](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736498169529-57c56fa2-7c84-474c-a93e-800a3f1a6059.png)
+
+![MFA](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736498179970-0db91a07-98be-4c79-810e-86f0e4ce7f33.png)
+
+2.配置界面如下，这里主要需要配置如下几个地方，配置完点击生成即可
+
+> + **Token name**：根据需求命名，便于识别。
+> + **Expiration**：根据需要设置 Token 有效期。
+> + **Description**：随意填写，描述 Token 用途。
+> + **Repository access**：选择 **"Only select repositories"**，勾选博客仓库。
+> + **Repository permissions**：勾选 **Contents** 和 **Metadata** 权限。
+> + **Account permissions: **忽略
+>
+
+![配置页面](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736498352551-83a70c48-a20d-4569-8644-a623a152a61d.png)
+
+![创建成功](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736498770811-e00b7fb3-5e70-491f-985b-5eb0b32c0aeb.png)
+
+![permission](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736502391964-58db43be-0be6-44d8-aafd-b94a4a971086.png)
+
+#### 4.2.4.初始化仓库并且推送代码
+1.配置用户信息
+
+> git config --global user.email "you@example.com"
+>
+> git config --global user.name "Your Name"
+>
+> #可选，缓存凭证，就不用每次登录了，配置文件在当前用户`**C:\Users\Administrator\.git-credentials**`
+>
+> git config --global credential.helper store
+>
+
+2.初始化Git仓库,会在本地用户目录创建一个.git目录
+
+> git init
+>
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736500991758-ef1c940f-ea72-4439-85dd-94f6ba2b64de.png)
+
+3.添加远程仓库
+
+> git remote add origin https://github.com/github用户名/博客名.github.io.git
+>
+
+4.把当前目录添加到暂存区，并且将暂存区的文件提交到本地仓库，并且备注原因
+
+> git add . 
+>
+> git commit -m "Initial commit"
+>
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736501133214-cc33bccb-7a32-4c39-93d9-d35ea0b3a605.png)
+
+5.推送至GitHub,输入git push后，就会出现token认证。输入生成的token即可。
+
+> git branch -M main
+>
+> git push -u origin main
+>
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736501333429-3c81ad77-b426-4392-9357-0eab05e4f4e9.png)
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736502810357-c7465964-98db-433d-8e9c-94216ce4b568.png)
+
+#### 4.2.5.配置github pages
+1. 推送文件后，进入 `username.github.io` 项目的设置页面，按照下图进行配置即可  
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736604450644-bc60f2b6-1d35-44c2-94f4-2063ab62701c.png)
+
+2.如上图所示，当前项目名与 GitHub 用户名不同。点击`Visit site`访问 URL 时，可能会发现 CSS 文件未正确加载，导致显示效果与本地预览不一致。  
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736604552208-5dcf988c-400f-4b34-8592-6d993b2a45a3.png)
+
+3.如果需要解决如上问题，需要修改jekyll`_config.yml` 的 `baseurl` 配置。然后重新推送
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736605064132-7acc7229-1b30-4a23-bf10-0143fcf32d12.png)
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736605090192-04baadff-a8e8-45fc-92e1-b1703a9e9d2b.png)
+
+4.不过一般建议仓库名和博客名相同，这样访问根路径即可看到博客。
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736605178000-49250297-308b-4d72-a88e-693f283f201a.png)
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736605163604-3b1ee758-3daf-4caf-ab57-87863abb10ab.png)
+
+### 4.3.博客维护
+> 如果上一节是用于初始化一个基础博客，那么接下来的维护工作主要是指导用户完成博客的美化和更新。这些步骤包括选择主题、优化样式，以及定期添加和更新内容，使博客更加美观和实用。 
+>
+
+#### 4.3.1.jekyll主题
+> 互联网上提供了众多开源的Jekyll主题资源，用户可以通过在线搜索轻松获取。本文将重点介绍一个资源丰富的网站：[http://jekyllthemes.org。](http://jekyllthemes.org。)
+>
+
+ 1.访问[jekyllthemes.org](http://jekyllthemes.org)，寻找想要的主题，可以根据关键词搜索
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736686470964-333469c6-56bb-4565-b281-086745344aa3.png)
+
+2.选中主题后，点击进入下载主题回来。点击homepage可以进入github项目看使用指引
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736686535095-74c2d531-999b-4d7c-ab55-f95eb00fa49b.png)
+
+3.比如这里拿`squarezero`做例子。下载项目回到本地后，修改_config.xml文件。最核心的2个部分是：
+
+> 当然，以下是更专业版本的表述：  
+`baseurl`: 用于指定基础路径，以便于构建相对URL。  
+`url`: 用于配置网站的完整链接地址。
+>
+> 若仓库名称与项目名称一致，则无需进行额外配置。否则，请参照前文所述方法配置 `baseurl`。
+>
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736687287063-3cf80317-4564-4f02-8389-2b8a672a6ddd.png)
+
+4.配置完成后推送至github即可自动部署。
+
+![](https://cdn.nlark.com/yuque/0/2025/png/2667978/1736687460718-99a7a88b-8d82-4cf6-bfca-9ff4816729b7.png)
+
+#### 4.3.2.jekyll编写博客指引
+##### _config.yml
+在配置 Jekyll 博客时，以下几项是最基本且至关重要的设置，它们构成了博客的核心配置。此外关于_config.yml的高级配置可以参考[介绍](https://jekyllcn.com/docs/configuration/)。
+
+> **title: "站点标题"**
+>
+> **# 站点的主标题，通常用于网页标题和 SEO。**
+>
+> **description: "站点描述"**
+>
+> **# 站点的简短描述，通常显示在搜索引擎和社交媒体中。**
+>
+> **url: "**[**https://example.com"**](https://example.com")
+>
+> **# 网站的主域名和协议，用于生成绝对路径。**
+>
+> **baseurl: "/subpath"**
+>
+> **# 部署的子路径，如果站点不是部署在根目录，必须配置。**
+>
+> **author: "作者名称"**
+>
+> **# 作者信息，可以在页面或文章中引用。**
+>
+> **markdown: kramdown**
+>
+> **# 指定 Markdown 解析器，Jekyll 默认使用 kramdown。**
+>
+
+##### 编写文章
+1. 创建文章文件,Jekyll 的文章文件放在 `_posts` 目录下，文件命名必须符合以下格式：
+
+> YYYY-MM-DD-title.md
+>
+> + `**YYYY-MM-DD**`**：文章发布日期，例如 **`**2025-01-13**`**。**
+> + `**title**`**：文章标题，例如 **`**my-first-post**`**。**
+>
+> 示例：_posts/2025-01-13-my-first-post.md
+>
+
+2. 添加 Front Matter，每篇文章必须包含 Front Matter（文件头部的 YAML 格式元数据），用于定义文章的基本信息和属性。
+
+> **基础配置：**
+>
+> ---
+>
+> layout: post
+>
+> title: "我的第一篇文章"
+>
+> date: 2025-01-13 10:00:00 +0800
+>
+> categories: [blog, tutorial]
+>
+> tags: [Jekyll, Markdown]
+>
+> ---  
+**解释：**
+>
+> + `**layout**`**：文章的布局模板（如 **`**post**`**，依赖于主题）。**
+> + `**title**`**：文章标题。**
+> + `**date**`**：发布日期（格式为 **`**YYYY-MM-DD HH:MM:SS**`**）。**
+> + `**categories**`**：文章分类（支持多个分类）。**
+> + `**tags**`**：文章标签（用于内容检索或展示）。**
+>
+
+3. 撰写内容，在 Front Matter 之后，用 Markdown 格式书写文章内容。
+
+```markdown
+---
+layout: post
+title: "我的第一篇文章"
+date: 2025-01-13 10:00:00 +0800
+categories: [blog, tutorial]
+tags: [Jekyll, Markdown]
+---
+
+欢迎来到我的第一篇文章！
+
+## 文章标题
+这是文章的第一部分。
+
+### 列表示例
+- 列表项 1
+- 列表项 2
+
+### 代码示例
+```python
+print("Hello, Jekyll!")
+```
+
+4.本地搭建查看效果
+
+> bundle exec jekyll serve
+>
+
+#### 4.3.3.推送相关
+1.每次编写博客前，先把博客项目拖回，可选命令
+
+> git pull origin main
+>
+
+2.在添加md后，进行推送
+
+> git add .
+>
+> git commit -m "添加或更新了文章：my-first-post"
+>
+> git push origin main
+>
+
+参考链接
+
+> [https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll) github部署jekyll教程
+>
+> [https://pages.github.com/versions/](https://pages.github.com/versions/) 依赖项版本
+>
+> [http://jekyllthemes.org](http://jekyllthemes.org/page2/) jekyll主题
+>
+
