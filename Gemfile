@@ -9,3 +9,4 @@ gem 'webrick', '~> 1.8'
 gem "csv"
 gem "base64"
 gem "bigdecimal"
+gem "jekyll-theme-potato-hacker", path: "./jekyll-theme-potato-hacker-1.0.5"
