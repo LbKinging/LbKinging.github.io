@@ -18,7 +18,7 @@ linkedin_id: "lbkinging"       # LinkedIn 用户 ID（如适用）
 
 # Theme
 # theme: jekyll-theme-potato-hacker           # 启用主题
-theme_repository: "https://github.com/luxedo/jekyll-theme-potato-hacker"  
+# theme_repository: "https://github.com/luxedo/jekyll-theme-potato-hacker"  
 theme_base: "dark"       # 默认主题颜色 (light | dark)
 theme_switch: on         # 是否启用颜色切换功能 (on | off)
 
