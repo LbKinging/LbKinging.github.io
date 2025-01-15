@@ -51,4 +51,5 @@ kramdown:
   input: GFM                      # 支持 GitHub 风格 Markdown
   syntax_highlighter: rouge
 exclude:
-  - Gemfile.lock
+  - Gemfile.lock'
+  - Gemfile
