@@ -1,0 +1,54 @@
+# Welcome to Jekyll!
+# Site settings
+title: "Lbkinging's Blog"  # 博客标题
+author: "Lbkinging"        # 作者名称
+email: "lbkinging@example.com"  # 你的邮箱地址
+description: "A blog by a retired red teamer exploring the world of blue teams."  
+baseurl: "/"  # 子路径（如适用）
+url: ""  # 站点的根路径地址（生产环境需要填写完整 URL）
+
+# ------------------------------------------------------------------------------
+# Custom settings
+# ------------------------------------------------------------------------------
+# Useful links
+github_username: "lbkinging"    # GitHub 用户名
+facebook_username: "lbkinging" # Facebook 用户名（如适用）
+twitter_username: "lbkinging"  # Twitter 用户名（如适用）
+linkedin_id: "lbkinging"       # LinkedIn 用户 ID（如适用）
+
+# Theme
+theme: jekyll-theme-potato-hacker           # 启用主题
+theme_repository: "https://github.com/luxedo/jekyll-theme-potato-hacker"  
+theme_base: "dark"       # 默认主题颜色 (light | dark)
+theme_switch: on         # 是否启用颜色切换功能 (on | off)
+
+# Extra settings
+blog: on                 # 启用博客标签和文章列表
+recent_posts: 5
+avatar: on               # 显示头像
+avatar_image: "assets/img/lb.png"  # 头像图片路径
+avatar_description: "Lbkinging , 一个热爱技术的技术人😄"
+highlighter_theme: gruvbox  # 代码高亮主题
+toolbar_priority:        # 工具栏项目顺序
+  - Home
+  - blog_type
+  - Blog
+  - About
+
+# Collections
+collections:
+  blog_type:
+    output: true
+  items:
+    output: true
+
+# ------------------------------------------------------------------------------
+# Build settings
+excerpt_separator: "<!--more-->"  # 用于文章摘要的分隔符
+markdown: kramdown                # Markdown 引擎
+highlighter: rouge                # 代码高亮引擎
+kramdown:
+  input: GFM                      # 支持 GitHub 风格 Markdown
+  syntax_highlighter: rouge
+exclude:
+  - Gemfile.lock
