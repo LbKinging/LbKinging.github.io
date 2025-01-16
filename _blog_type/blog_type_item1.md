@@ -6,22 +6,12 @@ dropdown: blog_type
 priority: 1
 ---
 
-# Liquid 示例
+# 安全运营介绍
+该部分介绍安全运营相关工具、技术点以及流程化的一些思考
 
-## 分类
-当前文章的分类是：  
-{{ page.categories | join: ', ' }}
-
-## 标签
-当前文章的标签是：  
-{{ page.tags | join: ', ' }}
-
-## 动态内容
-当前时间是：  
-{{ "now" | date: "%Y-%m-%d %H:%M:%S" }}
-
-## 列出所有文章
-以下是站点中所有文章的列表：
+# 相关文章
 {% for post in site.posts %}
-- [{{ post.title }}]({{ post.url }})
+  {% if post.tags contains "其它" %}
+  - [{{ post.title }}]({{ post.url }})
+  {% endif %}
 {% endfor %}
