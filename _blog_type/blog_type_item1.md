@@ -8,7 +8,7 @@ priority: 1
 
 # 安全运营
 
-> **安全运营**是一个系统性的话题，包括工具、技术和流程化管理的探索。以下是相关内容的分享，希望对您的实践有所启发。
+> **安全运营** 是一个系统性的话题，包括工具、技术和流程化管理的探索。以下是相关内容的分享，希望对您的实践有所启发。
 
 ---
 
@@ -17,13 +17,19 @@ priority: 1
 以下是包含 **"其它"** 标签的文章列表：
 
 <div class="article-list">
-{% for post in site.posts %}
-  {% if post.tags contains "其它" %}
-  - 📄 [{{ post.title }}]({{ post.url }})
-    <br>
-    <small>发表于 {{ post.date | date: "%Y-%m-%d" }}</small>
-  {% endif %}
-{% endfor %}
+  {% for post in site.posts %}
+    {% if post.tags contains "其它" %}
+    <div class="article-item">
+      <h3>
+        <a href="{{ post.url }}" class="article-link">{{ post.title }}</a>
+      </h3>
+      <p class="article-meta">
+        发表于 {{ post.date | date: "%Y-%m-%d" }}
+      </p>
+      <a href="{{ post.url }}" class="read-more">阅读更多 →</a>
+    </div>
+    {% endif %}
+  {% endfor %}
 </div>
 
 ---
@@ -31,12 +37,50 @@ priority: 1
 <style>
 .article-list {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-.article-list li {
-  margin-bottom: 15px;
+
+.article-item {
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #f9f9f9;
+  transition: box-shadow 0.3s ease;
 }
-.article-list small {
+
+.article-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.article-link {
+  color: #007BFF;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.article-link:hover {
+  text-decoration: underline;
+}
+
+.article-meta {
   color: #666;
-  font-style: italic;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
-</style>
+
+.read-more {
+  display: inline-block;
+  color: white;
+  background-color: #007BFF;
+  padding: 8px 15px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
