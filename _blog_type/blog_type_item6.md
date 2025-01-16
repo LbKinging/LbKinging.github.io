@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 安全运营
+title: 其它
 description: Test page
 dropdown: blog_type
 priority: 1
