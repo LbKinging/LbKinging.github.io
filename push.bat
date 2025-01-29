@@ -1,4 +1,5 @@
+bundle exec jekyll build --incremental
 git add . 
-git commit -m "更新了新文章"
+git commit -m "update a new blog"
 git branch -M main
 git push -u origin main
