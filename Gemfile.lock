@@ -8,8 +8,11 @@ GEM
   specs:
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
+    base64 (0.2.0)
+    bigdecimal (3.1.9)
     colorator (1.1.0)
     concurrent-ruby (1.2.3)
+    csv (3.3.2)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
@@ -71,7 +74,10 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  base64
+  bigdecimal
   bundler (~> 2.5.4)
+  csv
   jekyll (~> 3)
   jekyll-theme-potato-hacker!
   json (~> 2.7)
