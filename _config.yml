@@ -6,6 +6,7 @@ email: "lbkinging@example.com"  # 你的邮箱地址
 description: "A blog by a retired red teamer exploring the world of blue teams."  
 baseurl: "/"  # 子路径（如适用）
 url: ""  # 站点的根路径地址（生产环境需要填写完整 URL）
+future: true
 
 # ------------------------------------------------------------------------------
 # Custom settings
